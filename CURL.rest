@@ -1,21 +1,22 @@
 @base = http://localhost:3000
-@id = de8736fa-5799-4996-8c5d-087611bb6f7b
+@mobId = a9531436-bfcc-46bd-95b7-fad631f987a2
+@memberId = c5f119f1-cf54-46f5-afb6-89a1eaa19af6
 ### Create mob with name
 POST {{base}}/mobs
 Content-Type: application/json
 
 {
-  "mobName": "Test"
+  "mobName": "418"
 }
 
 ### Get all mobs
 GET {{base}}/mobs
 
-### Get a mob by id
-GET {{base}}/mobs/{{id}}
+### Get a mob by mobid
+GET {{base}}/mobs/{{mobId}}
 
 ### Add mob member
-POST {{base}}/mobs/{{id}}/members
+POST {{base}}/mobs/{{mobId}}/members
 Content-Type: application/json
 
 {
@@ -23,6 +24,9 @@ Content-Type: application/json
   "height": 163
 }
 
-### Get mob members by id
-GET {{base}}/mobs/{{id}}/members
+### Get mob members by mobid
+GET {{base}}/mobs/{{mobId}}/members
+
+### Get mob member by mobid and memberid
+GET {{base}}/mobs/{{mobId}}/members/{{memberId}}
 
