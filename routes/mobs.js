@@ -17,7 +17,8 @@ const getMobNames = path => {
   files.forEach(file => {
     const fileContent = readFileSync(join(path, file));
     const data = JSON.parse(fileContent.toString());
-    mobNames.push(data.mobName);
+    const {mobName, id} = data;
+    mobNames.push({mobName, id});
   });
   return mobNames;
 };
