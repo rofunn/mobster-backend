@@ -50,23 +50,21 @@ router.get('/:mobId/members', (req, res) => {
 
 router.post('/', (req, res) => {
   const { mobName } = req.body;
-  const { mobId } = req.params;
-  const mob = { mobName, id: mobId, members: [] };
-  writeMob(mob, req.id, dbPath);
-  res.status(201).end();
+  const id = req.id;
+  const mob = { id, mobName, members: [] };
+  writeMob(mob, id, dbPath);
+  res.status(201).json({id});
 });
 
-
-// router.post('/:mobId/members', (req, res) => {
-//   const { mobId } = req.params;
-//   const mob = getMob(mobId, dbPath);
-//   const newMember = req.body;
-//   newMember.id = req.id;
-//   newMember.mobName = mob.mobName;
-//   mob.members.push(newMember);
-//   // writeMob(mob, req.id, dbPath);
-//   console.log(mob);
-//   res.status(201).end();
-// });
+router.post('/:mobId/members', (req, res) => {
+  const { mobId } = req.params;
+  const mob = getMob(mobId, dbPath);
+  const newMember = req.body;
+  newMember.id = req.id;
+  newMember.mobName = mob.mobName;
+  mob.members.push(newMember);
+  writeMob(mob, mobId, dbPath);
+  res.status(201).end();
+});
 
 module.exports = router;

@@ -1,30 +1,28 @@
 @base = http://localhost:3000
-
-### Get all mobs
-GET {{base}}/mobs
-
-### Get members from a mob
-
-GET {{base}}/mobs/8d2ad7eb-4cde-4f8f-854d-5594d56a7216/members
-
-### Get mob(1)
-
-GET {{base}}/mobs/8d2ad7eb-4cde-4f8f-854d-5594d56a7216
-
+@id = de8736fa-5799-4996-8c5d-087611bb6f7b
 ### Create mob with name
-
 POST {{base}}/mobs
 Content-Type: application/json
 
 {
-  "mobName": "testy Tester"
+  "mobName": "Test"
 }
 
+### Get all mobs
+GET {{base}}/mobs
+
+### Get a mob by id
+GET {{base}}/mobs/{{id}}
+
 ### Add mob member
-POST {{base}}/mobs/8d2ad7eb-4cde-4f8f-854d-5594d56a7216/members
+POST {{base}}/mobs/{{id}}/members
 Content-Type: application/json
 
-   {
-      "name": "Allan Heremi",
-      "height": 163
-    },
+{
+  "name": "Allan Heremi",
+  "height": 163
+}
+
+### Get mob members by id
+GET {{base}}/mobs/{{id}}/members
+
