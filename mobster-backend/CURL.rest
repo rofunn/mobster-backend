@@ -1,0 +1,30 @@
+@base = http://localhost:3000
+
+### Get all mobs
+GET {{base}}/mobs
+
+### Get members from a mob
+
+GET {{base}}/mobs/8d2ad7eb-4cde-4f8f-854d-5594d56a7216/members
+
+### Get mob(1)
+
+GET {{base}}/mobs/8d2ad7eb-4cde-4f8f-854d-5594d56a7216
+
+### Create mob with name
+
+POST {{base}}/mobs
+Content-Type: application/json
+
+{
+  "mobName": "testy Tester"
+}
+
+### Add mob member
+POST {{base}}/mobs/8d2ad7eb-4cde-4f8f-854d-5594d56a7216/members
+Content-Type: application/json
+
+   {
+      "name": "Allan Heremi",
+      "height": 163
+    },
