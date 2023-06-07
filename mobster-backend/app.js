@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const cors = require('cors');
 const { uuid } = require('uuidv4');
 
 var mobsRouter = require('./routes/mobs');
@@ -13,6 +14,7 @@ const addId = (req, res, next) => {
   next();
 };
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(addId);
 app.use(express.json());
