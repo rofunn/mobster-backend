@@ -30,3 +30,12 @@ GET {{base}}/mobs/{{mobId}}/members
 ### Get mob member by mobid and memberid
 GET {{base}}/mobs/{{mobId}}/members/{{memberId}}
 
+### Get mob member by mobid and memberid
+GET {{base}}/mobs/{{mobId}}/members/blabla
+
+### Send generally incorrect
+GET {{base}}/nonsense
+
+### Send generally incorrect
+GET {{base}}/mobs/you
+

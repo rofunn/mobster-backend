@@ -2,52 +2,31 @@ var express = require('express');
 var router = express.Router();
 const { join } = require('path');
 const {
-  readFileSync,
-  writeFileSync,
-  existsSync,
-  readdirSync,
-  writeFile,
-} = require('fs');
-
+  getMob,
+  getMobNames,
+  writeMob,
+  getMember,
+} = require('../helperFunctions/routeHelpers');
 const dbPath = join(__dirname, '../db/mobs');
-
-const getMobNames = path => {
-  const files = readdirSync(path);
-  const mobNames = [];
-  files.forEach(file => {
-    const fileContent = readFileSync(join(path, file));
-    const data = JSON.parse(fileContent.toString());
-    const { mobName, id } = data;
-    mobNames.push({ mobName, id });
-  });
-  return mobNames;
-};
-
-const getMob = (id, path) => {
-  const file = readFileSync(join(path, id + '.json'));
-  return JSON.parse(file.toString());
-};
-
-const writeMob = (mob, id, path) => {
-  writeFileSync(join(path, id + '.json'), JSON.stringify(mob, null, 2));
-};
-
-const getMember = (mob, id) => mob.members.find(member => member.id == id);
 
 router.get('/', (_req, res) => {
   const data = getMobNames(dbPath);
   res.send(data);
 });
 
-router.get('/:mobId', (req, res) => {
+router.get('/:mobId', (req, res, next) => {
   const { mobId } = req.params;
-  const mob = getMob(mobId, dbPath);
-  res.json(mob);
+  try {
+    const mob = getMob(dbPath, mobId);
+    res.json(mob);
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.get('/:mobId/members', (req, res) => {
   const { mobId } = req.params;
-  const mob = getMob(mobId, dbPath);
+  const mob = getMob(dbPath, mobId);
   res.json(mob.members);
 });
 
@@ -62,7 +41,7 @@ router.post('/', (req, res) => {
 router.post('/:mobId/members', (req, res) => {
   const { mobId } = req.params;
   const memberId = req.id;
-  const mob = getMob(mobId, dbPath);
+  const mob = getMob(dbPath, mobId);
   const newMember = req.body;
   newMember.id = memberId;
   newMember.mobName = mob.mobName;
@@ -73,9 +52,12 @@ router.post('/:mobId/members', (req, res) => {
 
 router.get('/:mobId/members/:memberId', (req, res) => {
   const { mobId, memberId } = req.params;
-  console.log(req.params)
-  const mob = getMob(mobId, dbPath);
+  console.log(req.params);
+  const mob = getMob(dbPath, mobId);
   const member = getMember(mob, memberId);
+  if (!member) {
+    throw new Error('Member does not exist.');
+  }
   res.json(member);
 });
 
