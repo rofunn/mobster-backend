@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const mobSchema = Joi.object({
-  name: Joi.string().required(),
+  mobName: Joi.string().required(),
 });
 
 const memberSchema = Joi.object({

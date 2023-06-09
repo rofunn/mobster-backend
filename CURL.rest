@@ -1,12 +1,13 @@
 @base = http://localhost:3000
 @mobId = a9531436-bfcc-46bd-95b7-fad631f987a2
 @memberId = c5f119f1-cf54-46f5-afb6-89a1eaa19af6
-### Create mob with name
+
+### Create new mob - name
 POST {{base}}/mobs
 Content-Type: application/json
 
 {
-  "mobName": "418"
+  "mobName": ""
 }
 
 ### Get all mobs
@@ -20,8 +21,8 @@ POST {{base}}/mobs/{{mobId}}/members
 Content-Type: application/json
 
 {
-  "name": "Allan Heremi",
-  "height": 163
+  "name": "Person zero",
+  "height": 123
 }
 
 ### Get mob members by mobid

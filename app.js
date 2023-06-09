@@ -1,9 +1,9 @@
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
 const cors = require('cors');
 const { uuid } = require('uuidv4');
+const logger = require('./helperFunctions/logger');
 
 var mobsRouter = require('./routes/mobs');
 var errorRouter = require('./routes/error');
@@ -25,7 +25,6 @@ const errorHandler = (err, req, res, next) => {
 
 
 app.use(cors());
-app.use(logger('dev'));
 app.use(addId);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
