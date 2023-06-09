@@ -44,7 +44,7 @@ router.post('/', (req, res) => {
     throw new Error('Invalid mob name');
   }
   const id = req.id;
-  const mob = { id, value, members: [] };
+  const mob = { id, mobName: value.mobName, members: [] };
   writeMob(mob, id, dbPath);
   res.status(201).json({ id });
 });

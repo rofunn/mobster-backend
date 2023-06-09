@@ -1,13 +1,14 @@
 @base = http://localhost:3000
-@mobId = a9531436-bfcc-46bd-95b7-fad631f987a2
-@memberId = c5f119f1-cf54-46f5-afb6-89a1eaa19af6
+# @base = https://mobster-backend-production.up.railway.app
+@mobId = 9c98238b-a576-4354-9a71-9e341ba9717b
+@memberId = 596a9d1e-b3a2-4b2e-8ace-ada6063bcb50
 
 ### Create new mob - name
 POST {{base}}/mobs
 Content-Type: application/json
 
 {
-  "mobName": ""
+  "mobName": "JAR"
 }
 
 ### Get all mobs
@@ -21,8 +22,8 @@ POST {{base}}/mobs/{{mobId}}/members
 Content-Type: application/json
 
 {
-  "name": "Person zero",
-  "height": 123
+  "name": "Allan",
+  "height": 180
 }
 
 ### Get mob members by mobid
